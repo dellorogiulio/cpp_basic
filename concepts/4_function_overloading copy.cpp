@@ -1,7 +1,7 @@
 /* 
  --- FUNCTION OVERLOADING ---
-		In C++ you can declare functions overloading. In C infact, the signature of the function is simply its name.
-        In C++, instead, the function's signature contains also the arguments type. This allows the user to define functions
+		In C++ you can declare functions overloading. As a matter of fact, in C, the signature of the function is simply its name.
+        In C++, instead, the function's signature contains also ALL its arguments type. This allows the user to define functions
         with the same name which take different arguments.
 */
 
