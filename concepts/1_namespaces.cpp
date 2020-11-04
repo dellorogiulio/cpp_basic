@@ -4,7 +4,12 @@
 		in it.
 		Namespaces are useful to keep the code clean and organize and they "allow" function
 		redefinitions.
- */
+*/
+
+/*
+	More info:
+	https://www.youtube.com/watch?v=ts1Eek5w7ZA&t=650s
+*/
 
 namespace namespace1  // here a namespace declaration
 {                     // no need to indent in a namespace
@@ -39,12 +44,12 @@ namespace namespace3
 	Obviously not only function can be define in a namespace;
 	Classes, variables, functions... everything can be define in a namespace
 */
-const int value = 2;
+int value = 2;
 
 // And you can nest namespaces in a namespace
 namespace namespace3_inner
 {
-const int value = 3;
+int value = 3;
 }
 }  // namespace namespace3
 
@@ -85,8 +90,8 @@ int main()
 	*/
 
     /*  It is possible to access namespace members with no limit */
-    const int n6 = namespace3::value;
-    const int n7 = namespace3::namespace3_inner::value;
+    int n6 = namespace3::value;
+    int n7 = namespace3::namespace3_inner::value;
 
     return 0;
 }
