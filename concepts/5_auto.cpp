@@ -49,7 +49,7 @@ void useMyStruct()
     // here we create a MyStruct instance
     MyStruct my_struct;
 
-    // an now we want to access vector_of_vector_of_strings, maybe by const ref
+    // and now we want to access vector_of_vector_of_strings, maybe by const ref
     // we can declare the type explicitly:
     const std::vector<std::vector<std::map<unsigned int, std::string>>>& something = my_struct.something;
     // or use auto:
