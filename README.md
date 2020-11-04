@@ -9,7 +9,8 @@ For the ones who really loves C++, I suggest two youtube playlist:
 
 (All credits to specific authors)
 
-The former covers an incredible variety of arguments, spacing from basic concepts to very advanced once; while the latter can be easier to understand for novices.
-My suggestion is to start with the second by The Cherno and then pass to the first. 
+The first one covers an incredible variety of arguments, spacing from basic concepts to very advanced once; while the latter can be easier to understand for novices.
+
+My suggestion is to start with the second one by The Cherno and then pass to the first one. 
 
 I would try to add a link in each concept referring to the specific lesson
