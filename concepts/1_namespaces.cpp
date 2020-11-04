@@ -1,8 +1,8 @@
 /* 
  --- NAMESPACES ---
-		Namespaces are a sort of container in which everything is declaired in remains 
+		Namespaces are a sort of container in which everything is declaired and remains 
 		in it.
-		Namespaces are useful to keep the code clean and organize and they "allow" function
+		Namespaces are useful to keep the code clean and organized and they "allow" function
 		redefinitions.
 */
 
@@ -42,7 +42,7 @@ namespace namespace3
 {
 /*
 	Obviously not only function can be define in a namespace;
-	Classes, variables, functions... everything can be define in a namespace
+	Classes, variables, functions... everything can be defined in a namespace
 */
 int value = 2;
 
@@ -62,7 +62,7 @@ int main()
 	*/
 
     {
-        /*	It is possible to "keep up" everything which is a namespace to the current scope
+        /*	It is possible to "keep up" everything which is in a namespace to the current scope
 			by using the keyword "using namespace"
 		*/
         using namespace namespace1;
