@@ -52,12 +52,30 @@ void function3(int& non_const_ref_value)
     non_const_ref_value = 33;
 }
 
+int& function4()
+{
+    // pay attention to not return reference to temporay variables!
+    int i = 2;
+    return i;  // in gcc this returns a warning and not a compile error:  warning: reference to local variable 'i' returned [-Wreturn-local-addr]
+               // this is obviously wrong since the value of 'i' will be available no more once the stack of function4 is cleared.
+}
+
+int& function5()
+{
+    // You can istead return reference to always existing variable, such as static variable.
+    // Pay attention: when you get a reference for a function, you are not in charge to control che life-time of the referenced object.
+    static int always_present_value = 3;
+    return always_present_value;
+}
+
 int main()
 {
     function1();
     int my_value = 10;
     function2(my_value);
     function3(my_value);  // after this function call, my_value is 33
+    int& unavailable_value = function4();  // reference to local here!
+    int& available_value = function5();    // reference to existing variable
 
     // It is not (generally) possible to break the const rule:
     const int my_const_value = 12;
