@@ -2,8 +2,8 @@
  --- CONST ---
 		Const indicates that something cannot change, in other words "the object is read-only".
         It is useful in variables and in class methods (see future concepts).
-        It is good pratice to use const everywhere is possible: if a variable cannot change, indicates it as const.
-        This generally helps the complier to improve performance and optimize the generated assembly.
+        It is good pratice to use const everywhere is possible: if a variable cannot change, qualify it as const.
+        This generally helps the complier to improve performance and to optimize the generated assembly.
 
         For ones who comes from C, const is particullary useful to replace preprocessors #define.
         In C++, you should always try to avoid preprocessor operations: they are not part of the language, they are
@@ -48,7 +48,7 @@ int main(int argc, const char* argv[])
     }
     // Note: in this case my_defines::kValue1 is a 'constant-expression' since it is known at compile time.
 
-    // In this case instead, we can define a const value which is const but not a constant-expression:
+    // In this case instead, we can define a const value which is const but it's not a constant-expression (i.e. not know at compile time):
     // THIS IS A COMPILE ERROR
     // const int argc_value = argc;
     // int my_value = 2;
