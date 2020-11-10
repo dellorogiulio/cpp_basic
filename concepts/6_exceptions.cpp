@@ -144,3 +144,19 @@ int main()
     callHandledStoi();
     callWrongOrderCatch();
 }
+
+
+/* Important warning for Embedded Developers
+    We define Embedded Developers the programmers who write code for "simple" targets, where hardware resources are somehow very limited.
+    For this kind of targets, a sort of determinism is usually needed.
+    The current C++ implementations of EHS are targeted at general-purpose systems, often sacrificing code size, memory usage, and resource determinism
+    for the sake of performance.
+    This makes C++ exceptions an undesirable choice for embedded applications where code size and resource determinism are often a must-have.
+    Consequently, embedded coding guidelines either forbid the use of C++ exceptions, or embedded C++ toolchains omit exception handling altogether.
+  
+    As usual "embedded world" requires some specific attentions.
+    
+    Exceptions are powerful and so some implementations for embedded target have been (and will be) developed.
+    One of them is the one available in the powerful Embedded Template Library
+    https://www.etlcpp.com/
+*/
