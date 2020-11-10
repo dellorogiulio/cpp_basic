@@ -2,6 +2,7 @@
  --- EXCEPTIONS ---
 		Exceptions are a method to handle errors in modern languages.
         The fundamental idea is to throw an error (aka, an exception), when something goes wrong.
+	An Exception Handling System (EHS) is the set of resources responsible to have exceptions working.
 */
 
 /*
@@ -28,7 +29,7 @@
 */
 
 /* C++Style error handling
-    Errors are handled by throwing and exception (we will see later what this mean).
+    C++ offers an Exception Handling System (EHS) and so errors are handled by throwing and exception (we will see later what this mean).
     The atoi reference page (https://en.cppreference.com/w/cpp/string/basic_string/stol) reports:
     "Return value: Integer value corresponding to the content of str.
     Exceptions: std::invalid_argument if no conversion could be performed
