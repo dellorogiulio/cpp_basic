@@ -13,6 +13,11 @@
     - protected -> only the class subclasses can access the attribute/method (we will see in inheritance concept) 
 */
 
+/*
+	More info:
+	https://www.youtube.com/watch?v=Z_hPJ_EhceI
+*/
+
 namespace no_good
 {
 struct Person
@@ -120,15 +125,48 @@ class Person
         */
     }
 
-    std::string fullName() { return name_ + " " + surname_; }
+    std::string fullName() const { return name_ + " " + surname_; }
+    /* 
+    What does 'const' here means? 
+        a class method marked by 'const' is used to indicate that the method CANNOT change the class instance.
+        This means that, in the function body, is not allowed to modify any class attributes or to call any class method which is non-cost
+        See the example below.
+    
+    
+        void notAllowedMethod() const { name_ = "Marco"; }
 
+        The above method cannot compile, since the method is marked as const: implicitly name_ is marked as const too, and then is not possible to edit it.
+
+    But How does it works?
+        We saw that a class method has always a an hidden argument 'this'. A non-const method will look like:
+
+        void nonConstMethod(); -> 'seen by the compiler as' void nonConstMethod(Person* this)
+
+        a const method is the same, but this is marked as const!
+
+        void constMethod() const; -> void constMethod(const Person* this);
+
+        Since this is const, we are not allowed to modify it.
+
+    Why const method are so important?
+        A const method can be called even if the class instance is const. This means that we can call a const method when we have a const reference. 
+
+        std::string callFullName(const Person& person)
+        {
+            return person.fullName(); 
+
+            If fullName would not be marked as const, we could not call it here!
+        }
+
+    */
 };
-};  // namespace the_best
+}  // namespace the_best
 
 void useTheBestPerson()
 {
-    the_best::Person person("Mario", "Rossi"); // here we are calling the above declaired constructor
-    auto full_name = person.fullName();
+    const the_best::Person person("Mario", "Rossi");  // here we are calling the above declaired constructor
+    // not the use of const
+    auto full_name = person.fullName();  // the call of fullName() on person (which is const) is allowed since fullName is a const method
 }
 
 int main()
