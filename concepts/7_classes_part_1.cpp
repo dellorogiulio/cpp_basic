@@ -15,7 +15,10 @@
 #include <string>
 
 // C-Style
-// in C you can declare a struct, create a struct instance and than pass by pointer the instance to functions
+// in C you can:
+// - declare a struct (i.e. list which type of data it contains and their names)
+// - create (define) a struct instance (so that memory is allocated to store the instance itself)
+// - pass by pointer the instance to functions
 
 namespace c_style
 {
@@ -23,9 +26,9 @@ struct Person
 {
     std::string name;
     std::string surname;
-};
+};	// this is the declaration of the struct (no memory is reserved at this point)
 
-std::string getfullName(const Person* person)		// note the const pointer since getfullName() doesn't change the input parameter person
+std::string getfullName(const Person* person)		// note the const pointer since getfullName() doesn't change the input parameter person (TIP: const-qualify everything is possible)
 {
     return person->name + " " + person->surname;
 }
@@ -33,9 +36,9 @@ std::string getfullName(const Person* person)		// note the const pointer since g
 
 void cStylePerson()
 {
-    c_style::Person person = {.name = "Mario", .surname = "Rossi"};  // declaration and initialization (i.e. memory is allocated for 'person' and it's filled
+    c_style::Person person = {.name = "Mario", .surname = "Rossi"};  // definition and initialization together (i.e. memory is allocated for 'person' and it's filled
 								     // note the C99 "designated initializers" used to initialize 'person' (.name = xxx .surname = yyy)
-    auto full_name = c_style::getfullName(&person);                  // call function on the instance
+    auto full_name = c_style::getfullName(&person);                  // pass a pointer to the instance to a function
 }
 
 // Cpp-Style
