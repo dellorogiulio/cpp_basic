@@ -9,7 +9,7 @@
 /*
     OPERATORS 
     in this last episode on classes we will see operators.
-    Operators allows to define all well-known operator such as =, ==, !=, +, - and so on.
+    Operators allows us to define all the well-known operators such as =, ==, !=, +, - and so on.
     See https://en.cppreference.com/w/cpp/language/operators
 */
 /* 
@@ -76,7 +76,7 @@ class Complex
         return Complex(real_ + other.real(), imag_ + other.imag());
     }
 
-    Complex operator-(const Complex& other) const  // we can simply define an operator+ which takes another complex!
+    Complex operator-(const Complex& other) const  // we can simply define an operator- which takes another complex!
     {
         return Complex(real_ - other.real(), imag_ - other.imag());
     }
@@ -105,6 +105,7 @@ class Complex
     {
         return real_ == other.real() &&
                imag_ == other.imag();
+        // maybe == on double type is not a good idea, but it's an example...
     }
 
     bool operator!=(const Complex other) const
