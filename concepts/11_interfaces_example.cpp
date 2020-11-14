@@ -3,8 +3,9 @@
 */
 
 /*
-    Consider the case in which we would model a TCP message class. We have an already written library which provides us a TCP connection class.
-    This class, that we will call here 'TCPClient', allows us to send a buffer of bytes that are stored in a std::string. 
+    Let's suppose that we have already written a library which provides us a TCP connection class.
+    This class, that we call here 'TCPClient', allows us to send a buffer of bytes that are stored in a std::string over a TCP connection.
+    Now we need to model a TCP message class, so that we can fill the several messages to be sent.
 */
 
 #include <stdio.h>
@@ -12,7 +13,7 @@
 
 /*  
     CASE 1: pure inheritance
-        in this case we intend to extend a BasicMsg class and edit the base-class data from the subclass
+        in this case we're going to extend a BasicMsg class so that every subclass can edit the base-class data
 */
 
 struct TCPClient
@@ -41,17 +42,17 @@ void sendData(const BasicMsg& msg)
     tcp_client.send(msg.data());
 }
 
-struct IntMsg : public BasicMsg
+struct IntMsg : public BasicMsg   // this is the message where the content to be sent is of type 'int'
 {
     void setData(const int data) { data_ = std::to_string(data); }
 };
 
-struct StringMsg : public BasicMsg
+struct StringMsg : public BasicMsg   // this is the message where the content to be sent is of type 'std::string'
 {
     void setData(const std::string& data) { data_ = data; }
 };
 
-/* Here we are use pure inheritance: all subclasses directly set an attribute of BasicMsg and it returns the data */
+/* Here we are using pure inheritance: all subclasses directly set an attribute of BasicMsg and they return the data */
 /* In this case, we encode the data into a std::string everytime the data changes */
 
 void sendToTcp()
@@ -68,10 +69,11 @@ void sendToTcp()
 
 namespace second_try
 {
-/*  Now we try to declare an encode function which should return a std::string representing the encoded msg */
+/*  Now we're going to follow a different approach, declaring an encode function which returns a std::string representing the encoded msg */
 struct BasicMsg
 {
-    virtual std::string encode() const = 0;
+    virtual std::string encode() const = 0;  // pure virtual --> no matter the details, but EVERY XxxMsg MUST implement an encode() method which returns
+                                             // the std::string with the message enconding
 };
 
 class IntMsg : public BasicMsg
@@ -98,7 +100,7 @@ void sendData(const BasicMsg& msg)
     tcp_client.send(msg.encode());
 }
 
-/* Here we are use inheritance to create an interface: do you want to be a message? Simply expose a encode method which returns a std::string  */
+/* Here we are using inheritance to create an interface: do you want to be a message? Simply expose an encode() method which returns a std::string  */
 /* In this case, we encode only once before sending to the tcp connection */
 
 void sendToTcp()
