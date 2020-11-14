@@ -167,6 +167,9 @@ void assignPerson()
     AnotherPerson another_person1;
     AnotherPerson another_person2;
     another_person1 = another_person2;  // -> call of the compiler-generated copy-assignment operator, prints nothing
+ 
+    another_person1 = another_person1;  // -> call of the compiler-generated copy-assignment operator to do self assignment, prints nothing
+                                        // with this class it works, but pay attention to self assignment safety
 }
 
 }  // namespace with_assignment
