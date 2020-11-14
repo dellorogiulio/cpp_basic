@@ -6,8 +6,11 @@
 
 /*
     CONSTRUCTORS
-    Constructors are the way to build and initialize a class. They are fundamental part of a class since are called everytime we need to
+    Constructors are the way to build and initialize a class. They are fundamental part of a class since they are called everytime we need to
     create a new class instance.
+    The build job consists in finding and reserving the proper amount of memory to store the attributes.
+    The initialize job consists in filling the attributes with the proper value.
+    
     Exist 2 (starting from C++11, 3) fundamental constructors:
     - default constructor: A default constructor is a constructor which can be called with no arguments (https://en.cppreference.com/w/cpp/language/default_constructor)
     - copy constructor: A copy constructor is constructor whose first parameter is T&‍, const T&‍, volatile T&‍, or const volatile T&‍, and either there are no other parameters,
