@@ -14,7 +14,6 @@
 
     Inheritance is very important for modern programming languages, because it allows to create complex and flexible functionalities and the code re-usability.
     Therefore, inheritance allows to better explain what a programmer wants to obtain with a specific class.
-
 */
 
 /* 
@@ -37,9 +36,13 @@ struct Base
     void hi() const { puts("Hi, I'm Base"); }
 };
 
-struct Derived : public Base  // here we are declairing Derived as subclass of Base
+struct Derived : public Base  // here we are declaring Derived as subclass of Base
 {
-    // now Derived IS a Base. This means that Derived has everything that Base has.
+    // inheritance means that Derived IS A Base. This means that Derived has everything that Base has, and it can be
+    // used wherever Base can be used
+ 
+    // this is the class declaration and we qualified inheritance as 'public': this means that all the codebase where Derived is used
+    // will "see" this inheritance relation.
 
     // we can declare new Derived attributes and methods
    private:
@@ -57,7 +60,7 @@ void basicConcept()
 }
 }  // namespace first_try
 
-/* But what happens if we declare a method in a derived class that already exist in the base class? It depends! */
+/* But what happens if we declare a method in a derived class that already exist (with the same signature) in the base class? It depends! */
 
 namespace second_try
 {
@@ -96,7 +99,8 @@ void usePolymorphism()
     sayHi(derived);  // prints "Hi, I'm Base" too!
     /* 
         Why?
-        sayHi takes a const ref to Base, and you could think 'well, first_try::Base has its hi method, so obviously sayHi will always call it'...
+        sayHi() takes a const ref to Base, and you could think 'well, first_try::Base has its hi() method, so obviously sayHi() will always call it,
+        even if I pass a Derived'...
         This is wrong. Consider the example below
     */
 }
@@ -107,7 +111,7 @@ namespace third_try
 {
 struct Base
 {
-    virtual void hi() const { puts("Hi, I'm Base"); }  // same as in first_try, but now we mark hi as virtual!
+    virtual void hi() const { puts("Hi, I'm Base"); }  // same as in first_try, but now we mark hi() as virtual!
 };
 
 struct Derived : public Base
@@ -129,14 +133,21 @@ void usePolymorphism()
     sayHi(derived);  // prints ""Hi, I'm Derived"!
     /* 
         Why?
-        Because now Base::hi is virtual! Virtual its a powerfull tool, since allows the compiler to 'understand' that Base reference passed to
-        sayHi is not a 'pure' Base, but it's a Derived, and since Derived has override the hi method, it calls the correct one!
+        Because now Base::hi is virtual! Virtual it's a powerfull qualifier, since allows the compiler to 'understand' that the 'derived' reference passed to
+        the second sayHi is not a 'pure' Base, but it's a Derived; and since Derived has overridden the hi method, it calls the correct one!
+    */    
+    
+    /*  Note for an experienced C programmer:
+        This effect is called "dynamic dispatch" because the decision on which function has to be called (dispatch) is done at run time (dynamic).
+        It can be achieved looking to a table of functions (vtable - similar to a C-style array of pointer to functions) to find the function whose signature
+        has the "best match".
+        This lookup as a slight overhead during execution, but with modern compilers and hardware architectures it's usually not an issue.
     */
 }
 
 }  // namespace third_try
 
-// for the sake of completeness: when you override a virtual function of base class, you should specific the qualifier 'override' on the subclass:
+// for the sake of completeness: from C++11, when you override a virtual function of base class, you should specific the qualifier 'override' on the subclass:
 struct Derived : public third_try::Base
 {
     void hi() const override { puts("Hi, I'm Derived"); }  // note the use of override here! This allows the compiler to check if we are effectively
@@ -146,15 +157,17 @@ struct Derived : public third_try::Base
 /* 
     Pure virtual functions
         Now that we understand what a virtual function does, we can introduce another concept: pure virtual.
-        In the example above, Derived COULD override hi, but don't must do it: if Derived doesn't override hi, exists the Base version.
-        Pure virtual instead forces the Derived to override the hi function, Derived MUST do that, or the code will not compile.    
+        In the example above, Derived COULD override hi, but don't have to do it: if Derived doesn't override hi, the Base version is available.
+        Pure virtual, instead, forces the Derived to override the hi function, Derived MUST do that, or the code will not compile.    
 */
 
 namespace pure_virtual
 {
 struct Base
 {
-    virtual void hi() const = 0;
+    virtual void hi() const = 0;    // using '= 0' instead of the implementation '{ ... }' is the way to declare a method as "pure virtual"
+ 
+    // a class which has at least one pure virtual method is called ABSTRACT class
 };
 
 struct WrongDerived : public Base
@@ -177,10 +190,10 @@ void usePolymorphism()
     // THIS IS A COMPILE ERROR
     //Base b;
     //WrongDerived derived;
-    // we cannot declare a variable to be Base, since it needs a hi method!
-    // same as WrongDerived, since it needs a hi method!
+    // we cannot define a variable of type Base, since it needs a hi method! - Base is an abstract class and so a concrete instance cannot be created
+    // the same happens for WrongDerived, since it needs a hi method! - WrongDerived is an abstract class and so a concrete instance cannot be created
 
-    Derived derived;  // we can declare a Derived instance since its respect the pure virtual function!
+    Derived derived;  // we can define a Derived instance since it implements the pure virtual function!
     sayHi(derived);   // prints "Hi, I'm Derived"!
 }
 
@@ -200,3 +213,14 @@ int main()
     third_try::usePolymorphism();
     pure_virtual::usePolymorphism();
 }
+
+/*
+    DISCLAIMER:
+        At a first sight, inheritance seems really cool; an old-school C programmer usually thinks "I'm going to use it everywhere, because it saves me
+        a lot of job".
+        Inheritance is really powerful, but it's NOT the golden hammer of a C++ programmer (i.e. the tool that can be used everywhere, for any purpose, ...).
+        Public inheritance between two classes is a relation between them: it's the strongest relation between them and it creates a strong coupling
+        between the classes. Once you decide to establish an inheritance relation between two classes, it will be very very difficult breaking it afterwards.
+        
+        Use inheritance when you want to effective model the "IS A" relation.
+*/
