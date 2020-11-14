@@ -62,6 +62,15 @@ struct Person
         // of course, writing "return name;" is ok too: 'name' and 'this->name' are exactly the same!
     }
 };
+	
+// The answer to a classic question from an experienced (embedded) C programmer:
+// The "sizeof(...)" of a C++ struct is well-defined, but it's a consequence of a lot of concepts (not fully clear, at this point).
+// In some simple scenarios, it's equal to the C "sizeof(...)", but it's not a general rule.
+// And so:
+// - DO NOT RELY on the "sizeof(..)" of a C++ struct
+// - and so, DO NOT IMPLEMENT ANYMORE some low-level C-style "magic" on the instances (i.e. memcpy(), memcmp(), ...)
+// (see https://www.cprogramming.com/tutorial/size_of_class_object.html)
+	
 }  // namespace cpp_style
 
 void cppStylePerson()
