@@ -101,11 +101,12 @@ void usePerson()
 
 /*
     ASSIGNMENT OPERATOR
-    Assignment operator is the function which allows the operation = to work.
-    This means that we can assign a class instance to another. The most important assign operator is the copy-assignment operator (since C++11 there exists the move-assignment operator too).
-    The copy-assignment operator allows the right-hand side (rhs) of the assignment to become equal to the left-hand side (lhs)
+    Assignment operator is the function which is called when we use the operation =.
+    This means that it's called when we assign a class instance to another, already existing. The most important assign operator is the copy-assignment operator
+    (since C++11 the move-assignment operator exists too).
+    The copy-assignment operator allows the left-hand side (lhs) of the assignment to become equal to the right-hand side (rhs)
     
-    NOTE: rhs = lhs
+    NOTE: lhs = rhs
 
     It is important to keep in mind one important thing: the compiler has the ability and the freedom to define the copy-assignment operator for us. 
     The rule is the following:
@@ -127,13 +128,17 @@ class Person
                                             // is written operator= (in general, operator[SIGN])
                                             // takes exactly one argument of type const Person&
     {
-        if (&other != this)  // check that we are not assign to ourself
+        if (&other != this)  // check that we are not assigning to ourself
         {
             puts("copy assignment");
             name_ = other.name_;
             surname_ = other.surname_;
         }
-        return *this;  // we return a deference to ourself
+        else
+        {
+            puts("self assignment: doing nothing");
+        }
+        return *this;  // we return a reference to ourself
     }
 
     std::string fullName() const { return name_ + " " + surname_; }
@@ -153,7 +158,12 @@ void assignPerson()
     Person person1;
     Person person2;
     person1 = person2;  // -> call of the copy-assignment operator, prints 'copy assignment'
-
+ 
+    person1 = person1;  // -> call of the copy-assignment operator to handle self-assignment, prints 'self assignment: doing nothing'
+                        // self-assignment seems a stupid example, but it's not. It's completely legal C++ code and so every copy-assignment operator
+                        // MUST work as expected (doing nothig, without hidden issues) in the case of self-assignemt.
+                        // Believe me, this is not so easy; bu we need other concepts to clarify it.
+ 
     AnotherPerson another_person1;
     AnotherPerson another_person2;
     another_person1 = another_person2;  // -> call of the compiler-generated copy-assignment operator, prints nothing
