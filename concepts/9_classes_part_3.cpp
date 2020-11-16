@@ -56,6 +56,24 @@ class Person
         puts("copy constructor");
     }
 
+    /*
+        At this point we should understand how a constructor works and why is it so important: we can control what happens
+        when the class instance is built. What if we want to control what happens when the instance is un-built? 
+        The 'opposite' of the constructor is the destructor.
+
+        DESTRUCTOR:
+        THE destructor is a special method which is called by the compiler when a class instance goes out of scope. You should never 
+        call explicitly a class destructor, since you can release memory which must be release later!
+        Every class must have exactly ONE destructor (if no user-declaired destructor is provided, the compiler will declare it).
+        The destructor takes ZERO arguments.
+    */
+
+    ~Person()  // the destructor has the same name as the class with a heading ~
+    {
+        // here you have to handle all heap-allocated memory
+        puts("destructor");
+    }
+
     std::string fullName() const { return name_ + " " + surname_; }
 };
 
@@ -93,10 +111,12 @@ void usePerson()
 {
     Person person;                 // call of default constructor -> this prints 'default constructor'
     getPersonByReference(person);  // -> no copy is performed, prints nothing
-    getPersonByCopy(person);       // -> a copy is performed by calling the copy constructor -> prints 'copy constructor'
+    getPersonByCopy(person);       // -> a copy is performed by calling the copy constructor -> prints 'copy constructor' and then 'destructor'
+                                   //    since the copied object is destructed at the end of the function
 
     AnotherPerson another_person;            // call of the compiler-generated default constructor
     getAnotherPersonByCopy(another_person);  // -> a copy is performed by calling the compiler-generated copy constructor
+                                             //    a call of the compiler-generated destructor is called too
 }
 
 /*

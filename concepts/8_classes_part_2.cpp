@@ -140,7 +140,7 @@ class Person
         surname_ = surname;
         
         this is not technically correct: once the first { is open in the constructor body, all the class should be already initialized.
-	This is because before the constructor body is opened, the instance has already been constructed (memory allocated and, maybe, filled in some way).
+	    This is because before the constructor body is opened, the instance has already been constructed (memory allocated and, maybe, filled in some way).
         Setting the attributes in the constructor body involves a first (useless) initialization of all the class attributes to their default value, and then
         overwriting them by the assignment.
         */
@@ -179,11 +179,12 @@ class Person
             If fullName would not be marked as const, we could not call it here!
         }
 
-    TIP: one more time... const-qualify everything is possibile
-        This will help a lot the compiler creating optimized code.
-	Once you start const-qualifying data you quickly find that const-ness is pervasive (i.e. more and more items will be required to be const).
-	This is true even for legacy C code.
-	On embedded systems, when data is const-qualified, the compiler is FREE to put it in read-only memory (no guarantee that it will do; it's up to the compiler).
+        TIP:
+            one more time... const-qualify everything is possibile
+            This will help a lot the compiler creating optimized code.
+            Once you start const-qualifying data you quickly find that const-ness is pervasive (i.e. more and more items will be required to be const).
+            This is true even for legacy C code.
+            On embedded systems, when data is const-qualified, the compiler is FREE to put it in read-only memory (no guarantee that it will do; it's up to the compiler).
     */
 };
 }  // namespace the_best

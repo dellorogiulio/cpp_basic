@@ -205,6 +205,113 @@ void usePolymorphism()
     We will see a more interest example in the next episode
 */
 
+/*
+    We see virtual methods and how they can influence the runtime execution of a program and, in previous concepts, we saw constructors and destructors.
+    Can we declare a constructor or a destructor virtual?
+    - Constructors cannot be declared virtual -> compile error 'error: constructors cannot be declared 'virtual''
+    - Destructor can be declared virtual and its behaviour is analogous to another virtual method (see example below)
+*/
+
+namespace destructors
+{
+namespace non_virtually_destructable
+{
+struct Base
+{
+    Base()
+    {
+        puts("non_virtually_destructable::Base constructor");
+    }
+
+    ~Base()  // note that this destructor is non-virtual
+    {
+        puts("non_virtually_destructable::Base destructor");
+    }
+};
+
+struct Derive : public Base
+{
+    Derive()
+    {
+        puts("non_virtually_destructable::Derive constructor");
+    }
+
+    ~Derive()
+    {
+        puts("non_virtually_destructable::Derive destructor");
+    }
+};
+
+void callDestructor(Base* base)
+{
+    delete base;  // we are freeing (aka free(base)) the memory pointed by base
+}
+
+}  // namespace non_virtually_destructable
+
+namespace virtually_destructable
+{
+struct Base
+{
+    Base()
+    {
+        puts("virtually_destructable::Base constructor");
+    }
+
+    virtual ~Base()  // note that this destructor is virtual
+    {
+        puts("virtually_destructable::Base destructor");
+    }
+};
+
+struct Derive : public Base
+{
+    Derive()
+    {
+        puts("virtually_destructable::Derive constructor");
+    }
+
+    ~Derive()
+    {
+        puts("virtually_destructable::Derive destructor");
+    }
+};
+
+void callDestructor(Base* base)
+{
+    delete base;  // we are freeing (aka free(base)) the memory pointed by base
+}
+
+}  // namespace virtually_destructable
+
+}  // namespace destructors
+
+/* 
+    DEFAULT
+    We saw that, when some rules are met, the compiler is free to write some methods for us.
+    If we want to say to the compiler 'I know that here you generally doesn't write (for example) the default constructor because I 
+    provide a personal constructor, but write it anyway', we can use the 'default' keyword.
+    'Default' says to the compiler: "write what you will write if the rules that you expect are met"
+*/
+
+struct UseDefault
+{
+    UseDefault(int value) {}  // we are provide a user-defined constructor, generally no default constructor is written
+    UseDefault() = default;   // here we force the compiler to write it anyway
+};
+
+/* 
+    DELETE
+    If we want to deny a specific function call, we can say to the compiler: 'hey, this function is deny for everything. If someone call it you should not compile'.
+    We can achieve this by using the 'delete' keyword 
+*/
+
+struct UseDelete
+{
+    UseDelete() = default;                       // write default compiler-generated constructor
+    UseDelete(const UseDelete& other) = delete;  // we are saying: "none can declare or call the copy-constructor!"
+};
+
 int main()
 {
     first_try::basicConcept();
@@ -212,6 +319,24 @@ int main()
     second_try::usePolymorphism();
     third_try::usePolymorphism();
     pure_virtual::usePolymorphism();
+
+    using namespace destructors;
+    auto non_virtually_destructor_derived = new non_virtually_destructable::Derive();
+    auto virtually_destructor_derived = new virtually_destructable::Derive();
+    non_virtually_destructable::callDestructor(non_virtually_destructor_derived);  // prints 'non_virtually_destructable::Base destructor'
+    virtually_destructable::callDestructor(virtually_destructor_derived);          // prints 'virtually_destructable::Derive destructor' AND 'virtually_destructable::Base destructor'
+                                                                                   /* 
+        What happened in the lines above is very important! 
+        When we use polymorphism to call the NON-virtual destructor, the runtime has no way to understand that it should call the Derived destructor!
+        This involves that Derived remains partially destructed and it can involve a memory leak
+
+        When the destructor is virtual, the runtime is able to understand that Base* is instead a Derived* and call its destructor, deallocating correctly the memory
+        TIP: when your class is intended to be extended, always declare the destructor as virtual and NEVER inherit from a class whose destructor is non-virtual (es std::string)
+    */
+
+    UseDelete use_delete;
+    // THIS IS A COMPILER ERROR
+    // UseDelete use_delete2(use_delete) -> the copy-constructor is explicitly deleted!
 }
 
 /*
