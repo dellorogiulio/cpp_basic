@@ -29,7 +29,7 @@ namespace first_try
 {
 struct BasicMsg
 {
-    ~BasicMsgs() = default;
+    ~BasicMsg() = default;
 
    protected:
     std::string data_;
