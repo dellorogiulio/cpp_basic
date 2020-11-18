@@ -93,7 +93,8 @@ class Complex
 
     Complex operator*(const Complex& other) const
     {
-        return Complex(real() * other.real() - imag() * other.imag(), real() * other.imag() + imag() * other.real());
+        return Complex(real() * other.real() - imag() * other.imag(),
+                       real() * other.imag() + imag() * other.real());
     }
 
     Complex operator/(const Complex& other) const
