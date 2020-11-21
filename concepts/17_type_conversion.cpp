@@ -191,7 +191,7 @@ struct Derived : public Base
     void doSomethingSpecial() { printf("Derived::doSomethingSpecial()\r\n"); }
 };
 
-void doEverytingYouCan(Base* b)
+void doEverythingYouCan(Base* b)
 {
     b->doSomething();   // the proper doSomething() is called automatically, since it's virtual
     //b->doSomethingSpecial();    // compile error, since 'Base' doesn't have doSomethingSpecial()
@@ -205,10 +205,10 @@ void doEverytingYouCan(Base* b)
 void example()
 {
     Base b;
-    doEverytingYouCan(&b);
+    doEverythingYouCan(&b);
 
     Derived d;
-    doEverytingYouCan(&d);
+    doEverythingYouCan(&d);
 }
 }   // cpp_dynamic_cast
 
@@ -225,6 +225,6 @@ int main()
     Casts interfere with normal C++ type checking.
     As a result, we strongly recommend to avoid casts.
     This advice is particularly applicable to reinterpret_cast (they are always hazardous).
-    Every time you write a cast, you should think hard abou whether you can get the same result
+    Every time you write a cast, you should think hard about whether you can get the same result
     in a different way.
 */
