@@ -9,7 +9,7 @@
 /*
     OPERATORS 
     in this last episode on classes we will see operators.
-    Operators allows us to define all the well-known operators such as =, ==, !=, +, - and so on.
+    Operators allow us to define all the well-known operators such as =, ==, !=, +, - and so on.
     See https://en.cppreference.com/w/cpp/language/operators
 */
 /* 
@@ -20,16 +20,16 @@
 /*  we want to model a complex number: 1 + 3i */
 /*
     the Complex class has to provide:
-    - real part by a 'double real()' method
-    - imaginary part by a 'double imag()' method
-    - module by 'double abs()'
-    - phase by 'double phase()'
-    - conjugate by a 'Complex conj()' 
-    - all typical mathematic operation must be available:
+    - real part through a 'double real()' method
+    - imaginary part through a 'double imag()' method
+    - module through 'double abs()'
+    - phase through 'double phase()'
+    - conjugate through a 'Complex conj()' 
+    - all the typical mathematic operations must be available:
         - multiplication/division by scalar
-        - addition/subtraction between Complex
-        - multiplication/division between Complex
-    - we must be able to check if two Complex are equals
+        - addition/subtraction between two Complex
+        - multiplication/division between two Complex
+    - we must be able to check if two Complex are equal
 
 */
 class Complex
