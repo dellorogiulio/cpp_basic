@@ -14,3 +14,11 @@ The first one covers an incredible variety of arguments, spacing from basic conc
 My suggestion is to start with the second one by The Cherno and then pass to the first one. 
 
 I would try to add a link in each concept referring to the specific lesson
+
+## Coffee Machine Example
+
+The folder coffee_machine contains an example of how structure a "real" directory and some basic classes for a to-do project.
+This example shows how you could potentially implement some classes.
+
+See [Coffee Machine](coffee_machine/coffee_machine.md#top) for more info.
+

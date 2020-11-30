@@ -1,0 +1,30 @@
+{
+	"coffee": [
+		{
+			"liquid": "coffee",
+			"time [s]": "5"
+		}
+	],
+	"thè": [
+		{
+			"liquid": "thè",
+			"time [s]": "10"
+		}
+	],
+	"hot milk": [
+		{
+			"liquid": "milk",
+			"time [s]": "15"
+		}
+	],
+	"cappuccino": [
+		{
+			"liquid": "coffee",
+			"time [s]": "5"
+		},
+		{
+			"liquid": "milk",
+			"time [s]": "10"
+		}
+	]
+}
