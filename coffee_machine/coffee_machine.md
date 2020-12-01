@@ -23,8 +23,7 @@ Valve<1, ValveType::impulsive> stick_valve;
 ```
 Once you have a `Valve`, you can schedule an open by calling 
 ```cpp
-using namespace std::chrono_literals;
-coffee_valve.scheduleOpen(1s, 2s); // open_time, delay
+coffee_valve.scheduleOpen(1, 2); // open_time, delay
 ```
 and the valve schedules the job for you.
 
