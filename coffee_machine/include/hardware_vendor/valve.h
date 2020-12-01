@@ -3,7 +3,6 @@
 
 #include <string>
 #include <functional>
-#include <chrono>
 
 namespace coffee_machine
 {
@@ -19,7 +18,7 @@ class Valve
     const std::size_t rack_position_ = ValveRackPosition;
     static constexpr ValveType type_ = type;
 
-    void schedule(std::chrono::milliseconds, std::chrono::milliseconds)
+    void schedule(double, double)
     {
         // here we schedule the valve opening for open_time after delay
     }
@@ -29,7 +28,7 @@ class Valve
     {
     }
 
-    void scheduleOpen(std::chrono::milliseconds open_time, std::chrono::milliseconds delay = std::chrono::milliseconds(0))
+    void scheduleOpen(double open_time, double delay = 0)
     {
         return schedule(open_time, delay);
     }

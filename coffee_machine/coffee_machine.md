@@ -35,11 +35,11 @@ A button has a label to display on the coffee machine.
 A `Button` class can be created specifying its position on the rack and its label
 ```cpp
 using namespace coffee_machine;
-Button<0> thè_button;
+Button<0> tea_button;
 ```
 Once you have a `Button`, you can schedule a callback which will be handled by the button itself once someone presses it:
 ```cpp
-thè_button.onPressed([](){
+tea_button.onPressed([](){
 	//callback
 });
 ```
@@ -48,7 +48,7 @@ thè_button.onPressed([](){
 # Exercise One: Basic Model
 
 You should try to create a `CoffeeMachine` class which allows us to make:
-- a thè
+- a tea
 - a coffee
 
 The available hardware is:
@@ -70,9 +70,9 @@ The recipe for each beverage can be read from the `recipe.json` file which is so
 			"time [s]": "5"
 		}
 	],
-	"thè": [
+	"tea": [
 		{
-			"liquid": "thè",
+			"liquid": "tea",
 			"time [s]": "10"
 		}
 	],
@@ -102,7 +102,7 @@ You must follow the recipe.json, since it can be updated directly from the clien
 # Exercise Two: Advanced Model
 
 We need a class which allows us to make:
-- a thè
+- a tea
 - a coffee
 - an hot milk
 - a cappuccino
@@ -116,7 +116,7 @@ The available hardware is:
 # Exercise Three: Safety Model
 
 We need a class which allows us to make:
-- a thè
+- a tea
 - a coffee
 
 But must handle a safety glass which must be opened once the plastic stick is set into the cup. 
