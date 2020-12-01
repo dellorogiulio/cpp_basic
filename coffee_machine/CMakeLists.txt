@@ -37,7 +37,7 @@ target_include_directories(implementation PUBLIC
 )
 
 
-target_link_libraries(implementation hardware_vendor_lib)
+target_link_libraries(implementation hardware_vendor_lib nlohmann::json)
 
 
 add_executable(coffee_machine

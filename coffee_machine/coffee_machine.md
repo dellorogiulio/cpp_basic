@@ -66,29 +66,29 @@ The recipe for each beverage can be read from the `recipe.json` file which is so
 	"coffee": [
 		{
 			"liquid": "coffee",
-			"time [s]": "5"
+			"time [s]": 5
 		}
 	],
 	"tea": [
 		{
 			"liquid": "tea",
-			"time [s]": "10"
+			"time [s]": 10
 		}
 	],
 	"hot milk": [
 		{
 			"liquid": "milk",
-			"time [s]": "15"
+			"time [s]": 15
 		}
 	],
 	"cappuccino": [
 		{
 			"liquid": "coffee",
-			"time [s]": "5"
+			"time [s]": 5
 		},
 		{
 			"liquid": "milk",
-			"time [s]": "10"
+			"time [s]": 10
 		}
 	]
 }

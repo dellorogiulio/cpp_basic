@@ -8,6 +8,6 @@ int main()
 {
     CoffeeMachine coffee_machine;
     coffee_machine.makeCoffee();
-    coffee_machine.makeThe();
+    coffee_machine.makeTea();
     return 0;
 }
