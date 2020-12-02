@@ -3,14 +3,12 @@
 
 class CoffeeMachine
 {
-    bool is_running_ = true;
-
    public:
     void run();
 
    private:
-    void makeTea();
-    void makeCoffee();
+    long makeTea();
+    long makeCoffee();
 };
 
 #endif  // COFFEE_MACHINE_H

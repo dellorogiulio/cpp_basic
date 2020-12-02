@@ -5,23 +5,24 @@
 
 using json = nlohmann::json;
 
-void CoffeeMachine::makeCoffee()
+long CoffeeMachine::makeCoffee()
 {
     //your code here
+    return 0;
 }
 
-void CoffeeMachine::makeTea()
+long CoffeeMachine::makeTea()
 {
     //your code here
+    return 0;
 }
 
 void CoffeeMachine::run()
 {
-    while (is_running_)
-    {
-        std::cout << "I'm running\n";
-        // here trigger button press
-
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+    std::cout << "I'm running\n";
+    std::cout << "Make tea\n";
+    long tea_duration = makeTea();
+    std::this_thread::sleep_for(std::chrono::seconds(tea_duration));
+    std::cout << "Make coffee\n";
+    long coffee_duration = makeCoffee();
 }
