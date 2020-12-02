@@ -12,11 +12,11 @@ enum class ValveType
     impulsive,
 };
 
-template <std::size_t ValveRackPosition, ValveType type>
+template <ValveType type>
 class Valve
 {
-    const std::size_t rack_position_ = ValveRackPosition;
     static constexpr ValveType type_ = type;
+    const unsigned int rack_position_;
 
     void schedule(double, double)
     {
@@ -24,7 +24,8 @@ class Valve
     }
 
    public:
-    Valve()
+    Valve(unsigned int rack_position) :
+        rack_position_(rack_position)
     {
     }
 

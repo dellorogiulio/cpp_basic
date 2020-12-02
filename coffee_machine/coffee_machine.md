@@ -18,8 +18,8 @@ We can think to have a rack on which we mount different valves. Each valve can b
 A `Valve` class can be created specifying its position on an hypothetical valves rack and its type
 ```cpp
 using namespace coffee_machine;
-Valve<0, ValveType::modular> coffee_valve;
-Valve<1, ValveType::impulsive> stick_valve;
+Valve<ValveType::modular> coffee_valve(0); // index on valve rack
+Valve<ValveType::impulsive> stick_valve(1);
 ```
 Once you have a `Valve`, you can schedule an open by calling 
 ```cpp

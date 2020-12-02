@@ -7,7 +7,6 @@ using json = nlohmann::json;
 int main()
 {
     CoffeeMachine coffee_machine;
-    coffee_machine.makeCoffee();
-    coffee_machine.makeTea();
+    coffee_machine.run();
     return 0;
 }

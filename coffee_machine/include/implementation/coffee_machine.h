@@ -1,9 +1,14 @@
 #ifndef COFFEE_MACHINE_H
 #define COFFEE_MACHINE_H
 
-/* customize your code  */
-struct CoffeeMachine
+class CoffeeMachine
 {
+    bool is_running_ = true;
+
+   public:
+    void run();
+
+   private:
     void makeTea();
     void makeCoffee();
 };
